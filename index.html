@@ -395,6 +395,29 @@
       .animate-fadeIn { animation: fadeIn 0.7s cubic-bezier(0.4,0,0.2,1) forwards; }
       .delay-100 { animation-delay: 0.1s; }
     </style>
+    <style>
+      .blob-float-lg-mobile {
+        animation: blobFloat1 5s ease-in-out infinite alternate;
+      }
+      .blob-float-sm-mobile {
+        animation: blobFloat2 6s ease-in-out infinite alternate;
+      }
+      @keyframes blobFloat1 {
+        0% { transform: translateX(0) scale(1); }
+        100% { transform: translateX(-10px) scale(1.04) translateY(10px); }
+      }
+      @keyframes blobFloat2 {
+        0% { transform: translateX(0) scale(1); }
+        100% { transform: translateX(8px) scale(1.03) translateY(-8px); }
+      }
+      @media (max-width: 640px) {
+        .blob-float-lg-mobile { left: -10vw !important; width: 80vw !important; height: 60vw !important; top: 2vw !important; }
+        .blob-float-sm-mobile { right: 2vw !important; width: 38vw !important; height: 28vw !important; top: 6vw !important; }
+      }
+      @media (min-width: 641px) {
+        .blob-float-lg-mobile, .blob-float-sm-mobile { animation: none !important; }
+      }
+    </style>
 </head>
 <body class="bg-white text-gray-900">
   <!-- Welcome Loading Screen -->
@@ -480,21 +503,21 @@
     <!-- Divided Background with Geometric Shapes -->
     <div class="absolute inset-0 z-10">
       <!-- Large Rectangle - Left Side -->
-      <div class="absolute left-0 top-0 w-2/3 h-full overflow-hidden cursor-pointer blob-image" data-tilt-x="5" data-tilt-y="-5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 0 70% 60% 40% / 0 60% 40% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(-100%); opacity: 0;">
+      <div class="absolute left-0 top-0 w-2/3 h-full overflow-hidden cursor-pointer blob-image sm:blob-float-lg-mobile" data-tilt-x="5" data-tilt-y="-5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 0 70% 60% 40% / 0 60% 40% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(-100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" 
              alt="Studio Setup" 
              class="w-full h-full object-cover" style="border-radius: 0 70% 60% 40% / 0 60% 40% 60%;">
       </div>
       
       <!-- Square - Top Right -->
-      <div class="absolute right-2 top-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image" data-tilt-x="-5" data-tilt-y="5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
+      <div class="absolute right-2 top-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image sm:blob-float-sm-mobile" data-tilt-x="-5" data-tilt-y="5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
              alt="Camera Equipment" 
              class="w-full h-full object-cover" style="border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%;">
       </div>
       
-      <!-- Rectangle - Bottom Right -->
-      <div class="absolute right-2 bottom-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image" data-tilt-x="3" data-tilt-y="3" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
+      <!-- Rectangle - Bottom Right (hidden on mobile) -->
+      <div class="absolute right-2 bottom-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image hidden sm:block" data-tilt-x="3" data-tilt-y="3" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
              alt="Portrait Session" 
              class="w-full h-full object-cover" style="border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;">
