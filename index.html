@@ -385,7 +385,18 @@
 
     <style>
       .blob-image {
-        transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+        /* Enhanced 3D support for natural interactions */
+        transition: none;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        will-change: transform;
+        backface-visibility: hidden;
+        cursor: pointer;
+      }
+      
+      /* Enhanced hover states for better visual feedback */
+      .blob-image:hover {
+        z-index: 20;
       }
     </style>
     <style>
@@ -410,21 +421,14 @@
         0% { transform: translateX(0) scale(1); }
         100% { transform: translateX(8px) scale(1.03) translateY(-8px); }
       }
-      @media (max-width: 640px) {
-        .blob-float-lg-mobile { left: -10vw !important; width: 80vw !important; height: 60vw !important; top: 2vw !important; }
-        .blob-float-sm-mobile { right: 2vw !important; width: 38vw !important; height: 28vw !important; top: 6vw !important; }
-      }
-      @media (min-width: 641px) {
-        .blob-float-lg-mobile, .blob-float-sm-mobile { animation: none !important; }
+      /* Mobile-specific changes removed to maintain consistent hero layout */
+      /* Disable all floating animations to prevent conflicts with 3D tilt */
+      .blob-float-lg-mobile, .blob-float-sm-mobile { 
+        animation: none !important; 
       }
     </style>
     <style>
-      /* Move CTA buttons higher on mobile */
-      @media (max-width: 639px) {
-        .cta-mobile-fix {
-          bottom: 18vh !important;
-        }
-      }
+      /* CTA buttons positioning consistent across all devices */
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -509,23 +513,23 @@
     <!-- Professional Blur Overlay (now below blobs) -->
     <div class="absolute inset-0 z-0 bg-black bg-opacity-60 backdrop-blur-lg" style="backdrop-filter: blur(16px);"></div>
     <!-- Divided Background with Geometric Shapes -->
-    <div class="absolute inset-0 z-10">
+    <div class="absolute inset-0 z-15">
       <!-- Large Rectangle - Left Side -->
-      <div class="absolute left-0 top-0 w-2/3 h-full overflow-hidden cursor-pointer blob-image blob-float-lg-mobile" data-tilt-x="5" data-tilt-y="-5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 0 70% 60% 40% / 0 60% 40% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(-100%); opacity: 0;">
+      <div class="absolute left-0 top-0 w-2/3 h-full overflow-hidden cursor-pointer blob-image blob-float-lg-mobile" data-tilt-x="5" data-tilt-y="-5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 0 70% 60% 40% / 0 60% 40% 60%; transform: translateX(-100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" 
              alt="Studio Setup" 
              class="w-full h-full object-cover" style="border-radius: 0 70% 60% 40% / 0 60% 40% 60%;">
       </div>
       
       <!-- Square - Top Right -->
-      <div class="absolute right-2 top-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image blob-float-sm-mobile" data-tilt-x="-5" data-tilt-y="5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
+      <div class="absolute right-2 top-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image blob-float-sm-mobile" data-tilt-x="-5" data-tilt-y="5" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%; transform: translateX(100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
              alt="Camera Equipment" 
              class="w-full h-full object-cover" style="border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%;">
       </div>
       
-      <!-- Rectangle - Bottom Right (hidden on mobile) -->
-      <div class="absolute right-2 bottom-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image hidden sm:block" data-tilt-x="3" data-tilt-y="3" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); opacity: 0;">
+      <!-- Rectangle - Bottom Right -->
+      <div class="absolute right-2 bottom-2 w-1/3 h-2/5 overflow-hidden cursor-pointer blob-image" data-tilt-x="3" data-tilt-y="3" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; transform: translateX(100%); opacity: 0;">
         <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
              alt="Portrait Session" 
              class="w-full h-full object-cover" style="border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;">
@@ -539,15 +543,15 @@
     <div class="absolute inset-0 bg-gradient-to-br from-black/90 via-black/70 to-transparent" style="pointer-events: none;"></div>
     
     <!-- Hero Content -->
-    <div class="relative z-30 flex flex-col items-center justify-center text-center px-6 sm:px-8 md:px-12 w-full h-full">
-      <h1 class="text-4xl sm:text-6xl md:text-8xl font-hero-luckiest text-white mb-2 sm:mb-4" style="color: #fff; text-shadow: 0 4px 24px #000, 0 2px 0 #222; letter-spacing: 0.01em;">Law Photography</h1>
-      <span class="block text-lg sm:text-2xl md:text-3xl font-artistic gold-accent mb-2 sm:mb-3" style="text-shadow: 0 2px 12px #000, 0 1px 0 #222; font-weight: 700;">Capturing Memories That Matter</span>
-      <p class="text-base sm:text-lg md:text-xl font-body text-gray-100 mb-4 sm:mb-6 max-w-xl mx-auto" style="text-shadow: 0 1px 8px #000, 0 1px 0 #222; font-weight: 500;">Professional Photography & Videography for All Occasions</p>
+    <div class="relative z-5 flex flex-col items-center justify-center text-center px-6 sm:px-8 md:px-12 w-full h-full" style="pointer-events: none;">
+      <h1 class="text-6xl font-hero-luckiest text-white mb-4" style="color: #fff; text-shadow: 0 4px 24px #000, 0 2px 0 #222; letter-spacing: 0.01em;">Law Photography</h1>
+      <span class="block text-2xl font-artistic gold-accent mb-3" style="text-shadow: 0 2px 12px #000, 0 1px 0 #222; font-weight: 700;">Capturing Memories That Matter</span>
+      <p class="text-lg font-body text-gray-100 mb-6 max-w-xl mx-auto" style="text-shadow: 0 1px 8px #000, 0 1px 0 #222; font-weight: 500;">Professional Photography & Videography for All Occasions</p>
     </div>
-    <!-- Responsive CTA Buttons at Bottom of Hero -->
-    <div class="absolute bottom-0 left-0 right-0 sm:left-auto sm:right-8 sm:bottom-8 w-full sm:w-auto flex flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-end gap-3 px-6 sm:px-4 z-30 cta-mobile-fix">
-      <a href="#contact" class="w-full sm:w-auto inline-block px-8 py-3 bg-gold text-black font-hero-luckiest text-lg sm:text-xl rounded-full shadow-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300 text-center font-bold">Book a Session</a>
-      <a href="#gallery" class="w-full sm:w-auto inline-block px-8 py-3 border-2 border-gold text-white font-hero-luckiest text-lg sm:text-xl rounded-full shadow-lg hover:bg-gold hover:text-black hover:scale-105 transition-all duration-300 text-center font-bold bg-black bg-opacity-40">View Gallery</a>
+    <!-- CTA Buttons at Bottom of Hero -->
+    <div class="absolute bottom-8 right-8 flex flex-row items-end justify-end gap-3 px-4 z-20">
+      <a href="#contact" class="inline-block px-8 py-3 bg-gold text-black font-hero-luckiest text-xl rounded-full shadow-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300 text-center font-bold">Book a Session</a>
+      <a href="#gallery" class="inline-block px-8 py-3 border-2 border-gold text-white font-hero-luckiest text-xl rounded-full shadow-lg hover:bg-gold hover:text-black hover:scale-105 transition-all duration-300 text-center font-bold bg-black bg-opacity-40">View Gallery</a>
     </div>
   </section>
 
@@ -1642,65 +1646,142 @@
         });
       }
 
-      // 3D Hover Effects for Blob Images
+      // Enhanced 3D Hover Effects for Blob Images
       const blobImages = document.querySelectorAll('.blob-image');
       console.log('Found blob images:', blobImages.length);
       
-      let currentAutoHoverIndex = 0;
-      let autoHoverInterval;
-      
+      // Enhanced 3D effects with physics and smooth interactions
       blobImages.forEach((blob, index) => {
-          // Entrance animation
-          const entranceDelay = (index + 1) * 300;
+          let isHovering = false;
+          let currentTilt = { x: 0, y: 0 };
+          let targetTilt = { x: 0, y: 0 };
+          let animationId = null;
+          
+          // Entrance animation with enhanced timing
           setTimeout(() => {
-              blob.style.transform = 'translateX(0)';
               blob.style.opacity = '1';
-          }, entranceDelay);
-
-          // Set up 3D tilt effect after entrance animation
-          const hoverSetupDelay = entranceDelay + 1200;
-          setTimeout(() => {
-              let rafId = null;
-              let lastTilt = { x: 0, y: 0 };
-              // Dynamic 3D tilt on mousemove (throttled, no transition)
-              blob.addEventListener('mousemove', function(e) {
-                  if (rafId) return;
-                  rafId = requestAnimationFrame(() => {
-                      const rect = this.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
-                      const centerX = rect.width / 2;
-                      const centerY = rect.height / 2;
-                      // Max tilt in degrees
-                      const maxTilt = 16;
-                      let tiltX = ((y - centerY) / centerY) * -maxTilt;
-                      let tiltY = ((x - centerX) / centerX) * maxTilt;
-                      // Clamp for stability
-                      tiltX = Math.max(Math.min(tiltX, maxTilt), -maxTilt);
-                      tiltY = Math.max(Math.min(tiltY, maxTilt), -maxTilt);
-                      // Remove transition for instant response
-                      this.style.transition = 'none';
-                      this.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
-                      lastTilt = { x: tiltX, y: tiltY };
-                      rafId = null;
-                  });
-              });
-              // Reset on mouseleave with smooth transition
-              blob.addEventListener('mouseleave', function() {
-                  this.style.transition = 'transform 0.4s cubic-bezier(0.4,0,0.2,1)';
-                  this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                  setTimeout(() => {
-                      this.style.transition = '';
-                  }, 400);
-              });
-              // Remove transition on mouseenter for instant response
-              blob.addEventListener('mouseenter', function() {
-                  this.style.transition = '';
-              });
-          }, hoverSetupDelay);
+              blob.style.transform = 'translateX(0) perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+          }, (index + 1) * 200);
+          
+          // Smooth animation loop for natural movement
+          function animateTilt() {
+              if (!isHovering) return;
+              
+              // Smooth interpolation for natural movement
+              currentTilt.x += (targetTilt.x - currentTilt.x) * 0.15;
+              currentTilt.y += (targetTilt.y - currentTilt.y) * 0.15;
+              
+              // Apply enhanced 3D transform with depth
+              const scale = 1 + (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.002;
+              const translateZ = (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.5;
+              
+              blob.style.transform = `
+                  translateX(0) 
+                  perspective(1000px) 
+                  rotateX(${currentTilt.x}deg) 
+                  rotateY(${currentTilt.y}deg) 
+                  translateZ(${translateZ}px) 
+                  scale(${scale})
+              `;
+              
+              animationId = requestAnimationFrame(animateTilt);
+          }
+          
+          // Enhanced mouse enter with smooth transition
+          blob.addEventListener('mouseenter', function(e) {
+              isHovering = true;
+              this.style.transition = 'none';
+              this.style.cursor = 'grab';
+              
+              // Add enhanced visual effects
+              this.style.filter = 'brightness(1.15) contrast(1.1) saturate(1.05)';
+              this.style.boxShadow = '0 30px 60px -15px rgba(0, 0, 0, 0.95), 0 0 0 4px rgba(255, 255, 255, 0.5), 0 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4)';
+              
+              // Add subtle border glow
+              this.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+              
+              animateTilt();
+          });
+          
+          // Enhanced mouse move with physics-based calculations
+          blob.addEventListener('mousemove', function(e) {
+              if (!isHovering) return;
+              
+              const rect = this.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              
+              // Calculate distance from center for intensity
+              const distanceX = Math.abs(x - centerX) / centerX;
+              const distanceY = Math.abs(y - centerY) / centerY;
+              const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+              
+              // Dynamic max tilt based on distance and element size
+              const maxTilt = 18 + (distance * 8);
+              const tiltX = ((y - centerY) / centerY) * -maxTilt;
+              const tiltY = ((x - centerX) / centerX) * maxTilt;
+              
+              // Smooth target setting with easing
+              targetTilt.x = tiltX;
+              targetTilt.y = tiltY;
+          });
+          
+          // Enhanced mouse leave with natural spring-back
+          blob.addEventListener('mouseleave', function(e) {
+              isHovering = false;
+              this.style.cursor = 'pointer';
+              
+              // Remove enhanced visual effects
+              this.style.filter = 'brightness(1) contrast(1) saturate(1)';
+              this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+              this.style.border = 'none';
+              
+              // Smooth spring-back animation
+              targetTilt.x = 0;
+              targetTilt.y = 0;
+              
+              // Continue animation for smooth spring-back
+              function springBack() {
+                  currentTilt.x += (targetTilt.x - currentTilt.x) * 0.1;
+                  currentTilt.y += (targetTilt.y - currentTilt.y) * 0.1;
+                  
+                  const scale = 1 + (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.001;
+                  const translateZ = (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.3;
+                  
+                  blob.style.transform = `
+                      translateX(0) 
+                      perspective(1000px) 
+                      rotateX(${currentTilt.x}deg) 
+                      rotateY(${currentTilt.y}deg) 
+                      translateZ(${translateZ}px) 
+                      scale(${scale})
+                  `;
+                  
+                  if (Math.abs(currentTilt.x) > 0.1 || Math.abs(currentTilt.y) > 0.1) {
+                      requestAnimationFrame(springBack);
+                  } else {
+                      // Final reset
+                      blob.style.transform = 'translateX(0) perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+                      if (animationId) {
+                          cancelAnimationFrame(animationId);
+                      }
+                  }
+              }
+              
+              springBack();
+          });
+          
+          // Add click effect for extra interactivity
+          blob.addEventListener('click', function(e) {
+              // Add a subtle "press" effect
+              this.style.transform += ' scale(0.95)';
+              setTimeout(() => {
+                  this.style.transform = this.style.transform.replace(' scale(0.95)', '');
+              }, 150);
+          });
       });
-      
-      // Removed auto-hover function and setTimeout that started it
     });
   </script>
 </body>
