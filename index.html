@@ -398,6 +398,17 @@
       .blob-image:hover {
         z-index: 20;
       }
+      
+      /* Mobile touch optimizations */
+      @media (max-width: 768px) {
+        .blob-image {
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+      }
     </style>
     <style>
       @keyframes spin-slow { 100% { transform: rotate(360deg); } }
@@ -1728,6 +1739,97 @@
               targetTilt.y = tiltY;
           });
           
+          // Touch support for mobile devices
+          blob.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              isHovering = true;
+              this.style.transition = 'none';
+              this.style.cursor = 'grab';
+              
+              // Add enhanced visual effects
+              this.style.filter = 'brightness(1.15) contrast(1.1) saturate(1.05)';
+              this.style.boxShadow = '0 30px 60px -15px rgba(0, 0, 0, 0.95), 0 0 0 4px rgba(255, 255, 255, 0.5), 0 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4)';
+              this.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+              
+              animateTilt();
+          });
+          
+          blob.addEventListener('touchmove', function(e) {
+              if (!isHovering) return;
+              e.preventDefault();
+              
+              const touch = e.touches[0];
+              const rect = this.getBoundingClientRect();
+              const x = touch.clientX - rect.left;
+              const y = touch.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              
+              // Calculate distance from center for intensity
+              const distanceX = Math.abs(x - centerX) / centerX;
+              const distanceY = Math.abs(y - centerY) / centerY;
+              const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+              
+              // Dynamic max tilt based on distance and element size (slightly reduced for mobile)
+              const maxTilt = 15 + (distance * 6);
+              const tiltX = ((y - centerY) / centerY) * -maxTilt;
+              const tiltY = ((x - centerX) / centerX) * maxTilt;
+              
+              // Smooth target setting with easing
+              targetTilt.x = tiltX;
+              targetTilt.y = tiltY;
+          });
+          
+          blob.addEventListener('touchend', function(e) {
+              e.preventDefault();
+              isHovering = false;
+              this.style.cursor = 'pointer';
+              
+              // Remove enhanced visual effects
+              this.style.filter = 'brightness(1) contrast(1) saturate(1)';
+              this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+              this.style.border = 'none';
+              
+              // Add haptic feedback if available
+              if (navigator.vibrate) {
+                  navigator.vibrate(50);
+              }
+              
+              // Smooth spring-back animation
+              targetTilt.x = 0;
+              targetTilt.y = 0;
+              
+              // Continue animation for smooth spring-back
+              function springBack() {
+                  currentTilt.x += (targetTilt.x - currentTilt.x) * 0.1;
+                  currentTilt.y += (targetTilt.y - currentTilt.y) * 0.1;
+                  
+                  const scale = 1 + (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.001;
+                  const translateZ = (Math.abs(currentTilt.x) + Math.abs(currentTilt.y)) * 0.3;
+                  
+                  blob.style.transform = `
+                      translateX(0) 
+                      perspective(1000px) 
+                      rotateX(${currentTilt.x}deg) 
+                      rotateY(${currentTilt.y}deg) 
+                      translateZ(${translateZ}px) 
+                      scale(${scale})
+                  `;
+                  
+                  if (Math.abs(currentTilt.x) > 0.1 || Math.abs(currentTilt.y) > 0.1) {
+                      requestAnimationFrame(springBack);
+                  } else {
+                      // Final reset
+                      blob.style.transform = 'translateX(0) perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+                      if (animationId) {
+                          cancelAnimationFrame(animationId);
+                      }
+                  }
+              }
+              
+              springBack();
+          });
+          
           // Enhanced mouse leave with natural spring-back
           blob.addEventListener('mouseleave', function(e) {
               isHovering = false;
@@ -1773,7 +1875,7 @@
               springBack();
           });
           
-          // Add click effect for extra interactivity
+          // Add click/tap effect for extra interactivity
           blob.addEventListener('click', function(e) {
               // Add a subtle "press" effect
               this.style.transform += ' scale(0.95)';
@@ -1781,6 +1883,8 @@
                   this.style.transform = this.style.transform.replace(' scale(0.95)', '');
               }, 150);
           });
+          
+
       });
     });
   </script>
