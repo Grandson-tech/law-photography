@@ -418,6 +418,14 @@
         .blob-float-lg-mobile, .blob-float-sm-mobile { animation: none !important; }
       }
     </style>
+    <style>
+      /* Move CTA buttons higher on mobile */
+      @media (max-width: 639px) {
+        .cta-mobile-fix {
+          bottom: 18vh !important;
+        }
+      }
+    </style>
 </head>
 <body class="bg-white text-gray-900">
   <!-- Welcome Loading Screen -->
@@ -537,7 +545,7 @@
       <p class="text-base sm:text-lg md:text-xl font-body text-gray-100 mb-4 sm:mb-6 max-w-xl mx-auto" style="text-shadow: 0 1px 8px #000, 0 1px 0 #222; font-weight: 500;">Professional Photography & Videography for All Occasions</p>
     </div>
     <!-- Responsive CTA Buttons at Bottom of Hero -->
-    <div class="absolute bottom-0 left-0 right-0 sm:left-auto sm:right-8 sm:bottom-8 w-full sm:w-auto flex flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-end gap-3 pb-8 sm:pb-0 px-6 sm:px-4 z-30">
+    <div class="absolute bottom-0 left-0 right-0 sm:left-auto sm:right-8 sm:bottom-8 w-full sm:w-auto flex flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-end gap-3 px-6 sm:px-4 z-30 cta-mobile-fix">
       <a href="#contact" class="w-full sm:w-auto inline-block px-8 py-3 bg-gold text-black font-hero-luckiest text-lg sm:text-xl rounded-full shadow-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300 text-center font-bold">Book a Session</a>
       <a href="#gallery" class="w-full sm:w-auto inline-block px-8 py-3 border-2 border-gold text-white font-hero-luckiest text-lg sm:text-xl rounded-full shadow-lg hover:bg-gold hover:text-black hover:scale-105 transition-all duration-300 text-center font-bold bg-black bg-opacity-40">View Gallery</a>
     </div>
