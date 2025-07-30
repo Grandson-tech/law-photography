@@ -480,6 +480,58 @@
       .blob-float-lg-mobile, .blob-float-sm-mobile { 
         animation: none !important; 
       }
+      
+      /* Shimmer animation for decorative line */
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      .animate-shimmer {
+        animation: shimmer 1.5s ease-in-out infinite;
+      }
+      
+      /* Ensure hover animations work */
+      .hover\:animate-pulse:hover {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .hover\:animate-shimmer:hover {
+        animation: shimmer 1.5s ease-in-out infinite;
+      }
+      
+      /* Horizontal scroll for service cards */
+      .scroll-snap-x {
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+      }
+      
+      .scroll-snap-x::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+      }
+      
+      .scroll-snap-start {
+        scroll-snap-align: start;
+      }
+      
+      /* Hide scrollbar for gallery accordion */
+      .portfolio-accordion-container {
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+      }
+      
+      .portfolio-accordion-container::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+      }
+      
+      /* Hide scrollbar for testimonials carousel */
+      .testimonials-carousel {
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+      }
+      
+      .testimonials-carousel::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+      }
     </style>
     <style>
       /* CTA buttons positioning consistent across all devices */
@@ -585,188 +637,230 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-20 flex flex-col md:flex-row items-center w-full px-4 border-b border-gray-200" style="background: linear-gradient(135deg, #1a0f1a 0%, #4a1a2a 50%, #2d0f1a 100%);">
-    <div class="md:w-7/12 mb-10 md:mb-0 md:pr-16 flex flex-col items-center md:items-start">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-artistic mb-6 gold-accent leading-tight text-center md:text-left font-bold tracking-tight">About the Photographer</h2>
-      <div class="w-20 h-1 bg-gold rounded-full mb-8 md:mb-8"></div>
-      <p class="font-body text-base sm:text-lg md:text-xl text-gray-200 mb-0 leading-relaxed text-center md:text-left max-w-xl md:max-w-2xl font-medium" style="line-height:1.7; letter-spacing:0.01em;">With a passion for classic storytelling and a refined eye, I create images that feel both timeless and modern.<br><br>From elegant weddings to editorial portraits, my work blends artistry with authenticity, ensuring every photo is a piece of art. My approach is collaborative, professional, and always focused on capturing the true essence of every client and event.</p>
-    </div>
-    <div class="md:w-5/12 flex flex-col md:flex-row gap-8 justify-center md:justify-end items-center md:items-stretch">
-      <div class="flex flex-row md:flex-col gap-6 md:mr-4">
-        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Artistic Photographer 1" class="rounded-lg shadow-lg grayscale object-cover w-28 h-28 md:w-36 md:h-44 border-4 border-gold transform -rotate-6">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Artistic Photographer 2" class="rounded-lg shadow-lg grayscale object-cover w-28 h-28 md:w-36 md:h-44 border-4 border-gold mt-4 md:mt-0 transform rotate-6">
+  <section id="about" class="py-20" style="background: linear-gradient(135deg, #fdf6f0 0%, #f8f1e8 25%, #f3e8d8 50%, #eee2d0 75%, #e8d8c0 100%); border: none; margin: 0;">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-2xl border border-amber-100/30">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <!-- Left Column - Profile Image -->
+          <div class="lg:w-5/12 flex justify-center">
+            <div class="relative">
+              <img src="images/brian.jpg" alt="Nex Jackson - Photographer" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl">
+            </div>
+          </div>
+          
+          <!-- Right Column - Content -->
+          <div class="lg:w-7/12 space-y-8">
+            <!-- About Me Label -->
+            <div class="mb-6 cursor-pointer">
+              <div class="inline-block">
+                <div class="text-amber-700 text-xl font-bold uppercase tracking-widest mb-3 bg-amber-50 px-4 py-2 rounded-lg border-l-4 border-amber-500">
+                  About Me
+                </div>
+                <div class="w-full h-2 bg-gradient-to-r from-gray-700 via-red-600 to-gray-700 rounded-full mt-3 shadow-sm relative overflow-hidden animate-pulse">
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Main Heading -->
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+              My name is Nex Jackson, I'm a <span class="text-red-500">Photographer.</span>
+            </h2>
+            
+            <!-- Description -->
+            <p class="text-gray-600 text-lg leading-relaxed max-w-2xl">
+              At Nex Photography, we believe in capturing moments with creativity, authenticity and style. Whether it's a candid smile, a breathtaking landscape, or a carefully crafted portrait, our goal is to provide you with images that tell a story and leave a lasting impression.
+            </p>
+            
+            <!-- Statistics -->
+            <div class="grid grid-cols-3 gap-8 pt-4">
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-red-500 mb-2">2000+</div>
+                <div class="text-gray-600 text-sm">Finished Photosessions</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-red-500 mb-2">1200+</div>
+                <div class="text-gray-600 text-sm">Studio Sessions</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-red-500 mb-2">800+</div>
+                <div class="text-gray-600 text-sm">Happy Clients</div>
+              </div>
+            </div>
+            
+            <!-- Call to Action Button -->
+            <div class="pt-6">
+              <a href="#contact" class="inline-block px-8 py-4 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
+                Book an Appointment
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <img src="images/brian.jpg" alt="Brian Mwenda - Photographer" class="rounded-lg shadow-lg grayscale object-cover w-44 h-44 md:w-64 md:h-96 border-4 border-gold self-center md:self-auto transform -rotate-2">
     </div>
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="py-20" style="background: linear-gradient(135deg, #1a0f1a 0%, #4a1a2a 50%, #2d0f1a 100%);">
+  <section id="services" class="py-20" style="background: linear-gradient(135deg, #fdf6f0 0%, #f8f1e8 25%, #f3e8d8 50%, #eee2d0 75%, #e8d8c0 100%); border: none; margin: 0;">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-artistic text-white mb-6 gold-accent font-bold tracking-tight">Our Services</h2>
-        <p class="text-xl text-gray-200 max-w-3xl mx-auto">Comprehensive photography solutions tailored to capture your most precious moments with artistic excellence</p>
+        <div class="inline-block mb-6">
+          <div class="text-amber-700 text-xl font-bold uppercase tracking-widest mb-3 bg-amber-50 px-4 py-2 rounded-lg border-l-4 border-amber-500">
+            Our Services
+          </div>
+          <div class="w-full h-2 bg-gradient-to-r from-gray-700 via-red-600 to-gray-700 rounded-full mt-3 shadow-sm relative overflow-hidden animate-pulse">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+          </div>
+        </div>
+        <h2 class="text-5xl font-serif mb-6 font-bold tracking-tight" style="font-family: 'Playfair Display', 'Times New Roman', serif; color: #2c3e50; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Professional Photography Solutions</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive photography services tailored to capture your most precious moments with artistic excellence</p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-x-visible scroll-snap-x md:scroll-snap-none -webkit-overflow-scrolling-touch md:-webkit-overflow-scrolling-auto gap-4 md:gap-6 lg:gap-8 px-4 md:px-0 max-w-7xl mx-auto">
         <!-- Wedding Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=600&q=80" alt="Wedding Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center transform rotate-12">
-                <span class="text-white font-bold text-lg">W</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Weddings</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Elegant, candid, and emotional coverage of your special day.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-red-400 transition-colors duration-300">Weddings</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Elegant, candid, and emotional coverage of your special day. From intimate moments to grand celebrations.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $1,200</span>
-              <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $1,200</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Portrait Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Portrait Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center transform -rotate-12">
-                <span class="text-black font-bold text-lg">P</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Portraits</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Personal, family, and business portraits with a classic touch.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-gold transition-colors duration-300">Portraits</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Personal, family, and business portraits with a classic touch. Each session tailored to your story.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $300</span>
-              <button class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $300</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Event Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Event Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center transform rotate-12">
-                <span class="text-white font-bold text-lg">E</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Events</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Professional coverage for corporate, social, and private events.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-red-400 transition-colors duration-300">Events</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Professional coverage for corporate, social, and private events with precision and creativity.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $500</span>
-              <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $500</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Corporate Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80" alt="Corporate Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center transform -rotate-12">
-                <span class="text-black font-bold text-lg">C</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Corporate</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Professional headshots and corporate event photography.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-gold transition-colors duration-300">Corporate</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Professional headshots and corporate event photography for your business needs.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $200</span>
-              <button class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $200</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Fashion Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80" alt="Fashion Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center transform rotate-12">
-                <span class="text-white font-bold text-lg">F</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Fashion</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Editorial and commercial fashion photography with artistic vision.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-red-400 transition-colors duration-300">Fashion</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Editorial and commercial fashion photography with artistic vision and professional lighting.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $800</span>
-              <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $800</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Real Estate Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Real Estate Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center transform -rotate-12">
-                <span class="text-black font-bold text-lg">R</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Real Estate</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Professional real estate and architectural photography.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-gold transition-colors duration-300">Real Estate</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Professional real estate and architectural photography that showcases properties in their best light.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $150</span>
-              <button class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $150</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
         
         <!-- Product Photography -->
-        <div class="service-card-modern group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
-          <div class="relative h-64 overflow-hidden">
+        <div class="service-card-modern group relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 border border-amber-100/30 flex-shrink-0 w-[85vw] md:w-auto scroll-snap-start">
+          <div class="relative h-80 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80" alt="Product Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center transform rotate-12">
-                <span class="text-white font-bold text-lg">P</span>
-              </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-3xl font-serif text-white mb-2 group-hover:text-red-300 transition-colors duration-300" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Product</h3>
+              <p class="text-white text-sm leading-relaxed" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Professional product and commercial photography that drives sales.</p>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-serif text-white mb-3 group-hover:text-red-400 transition-colors duration-300">Product</h3>
-            <p class="text-gray-200 mb-4 leading-relaxed">Professional product and commercial photography that drives sales and showcases quality.</p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-300">Starting from $100</span>
-              <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-300">
-                Learn More
-              </button>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold text-gray-700">Starting from $100</span>
+              <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-2xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Learn More
+            </button>
           </div>
         </div>
       </div>
@@ -774,11 +868,19 @@
   </section>
 
   <!-- Gallery Section -->
-  <section id="gallery" class="py-20" style="background: linear-gradient(135deg, #1a0f1a 0%, #4a1a2a 50%, #2d0f1a 100%);">
+  <section id="gallery" class="py-20" style="background: linear-gradient(135deg, #fdf6f0 0%, #f8f1e8 25%, #f3e8d8 50%, #eee2d0 75%, #e8d8c0 100%); border: none; margin: 0;">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-artistic text-white mb-6 gold-accent font-bold tracking-tight">Our Gallery</h2>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">A curated collection showcasing our passion for capturing life's most precious moments</p>
+        <div class="inline-block mb-6">
+          <div class="text-amber-700 text-xl font-bold uppercase tracking-widest mb-3 bg-amber-50 px-4 py-2 rounded-lg border-l-4 border-amber-500">
+            Our Gallery
+          </div>
+          <div class="w-full h-2 bg-gradient-to-r from-gray-700 via-red-600 to-gray-700 rounded-full mt-3 shadow-sm relative overflow-hidden animate-pulse">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+          </div>
+        </div>
+        <h2 class="text-5xl font-serif mb-6 font-bold tracking-tight" style="font-family: 'Playfair Display', 'Times New Roman', serif; color: #2c3e50; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Curated Photography Collection</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">A curated collection showcasing our passion for capturing life's most precious moments with artistic excellence</p>
       </div>
       
       <!-- Filter Buttons -->
@@ -1049,79 +1151,90 @@
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="py-24" style="background: linear-gradient(135deg, #1a0f1a 0%, #4a1a2a 50%, #2d0f1a 100%);">
+  <section id="testimonials" class="py-24" style="background: linear-gradient(135deg, #fdf6f0 0%, #f8f1e8 25%, #f3e8d8 50%, #eee2d0 75%, #e8d8c0 100%); border: none; margin: 0;">
     <div class="max-w-6xl mx-auto px-4">
+      <!-- Enhanced Header with Badge Style -->
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-artistic text-white mb-6 gold-accent font-bold tracking-tight">Client Testimonials</h2>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Hear from our clients about their experience and the memories we've captured together</p>
+        <div class="mb-6">
+          <div class="inline-block">
+            <div class="text-amber-700 text-xl font-bold uppercase tracking-widest mb-3 bg-amber-50 px-4 py-2 rounded-lg border-l-4 border-amber-500">
+              Client Testimonials
+            </div>
+            <div class="w-full h-2 bg-gradient-to-r from-gray-700 via-red-600 to-gray-700 rounded-full mt-3 shadow-sm relative overflow-hidden animate-pulse">
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="text-5xl font-serif mb-6" style="font-family: 'Playfair Display', 'Times New Roman', serif; color: #2c3e50; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Trusted by Our Clients</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Hear from our clients about their experience and the memories we've captured together</p>
       </div>
       
       <!-- Desktop Grid Layout -->
       <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Testimonial 1 -->
-        <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2">
+        <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-8 border border-amber-100/30 hover:bg-white/95 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
-              <span class="text-black font-bold text-lg">S</span>
+            <div class="w-14 h-14 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-4 shadow-lg">
+              <span class="text-white font-bold text-xl">S</span>
             </div>
             <div>
-              <h4 class="text-white font-semibold">Sarah & John</h4>
-              <p class="text-gray-300 text-sm">Wedding Couple</p>
+              <h4 class="text-gray-800 font-semibold text-lg">Sarah & John</h4>
+              <p class="text-gray-600 text-sm">Wedding Couple</p>
             </div>
           </div>
-          <blockquote class="italic text-gray-200 leading-relaxed mb-4">"Absolutely stunning photos! Captured every moment perfectly. The attention to detail and artistic vision exceeded our expectations."</blockquote>
-          <div class="flex text-gold">
+          <blockquote class="italic text-gray-700 leading-relaxed mb-4 text-base">"Absolutely stunning photos! Captured every moment perfectly. The attention to detail and artistic vision exceeded our expectations."</blockquote>
+          <div class="flex text-amber-500">
             <span class="text-xl">★★★★★</span>
           </div>
         </div>
         
         <!-- Testimonial 2 -->
-        <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2">
+        <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-8 border border-amber-100/30 hover:bg-white/95 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mr-4">
-              <span class="text-white font-bold text-lg">M</span>
+            <div class="w-14 h-14 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+              <span class="text-white font-bold text-xl">M</span>
             </div>
             <div>
-              <h4 class="text-white font-semibold">Michael B.</h4>
-              <p class="text-gray-300 text-sm">Corporate Client</p>
+              <h4 class="text-gray-800 font-semibold text-lg">Michael B.</h4>
+              <p class="text-gray-600 text-sm">Corporate Client</p>
             </div>
           </div>
-          <blockquote class="italic text-gray-200 leading-relaxed mb-4">"Professional, creative, and a joy to work with. Our corporate headshots look absolutely amazing and professional."</blockquote>
-          <div class="flex text-gold">
+          <blockquote class="italic text-gray-700 leading-relaxed mb-4 text-base">"Professional, creative, and a joy to work with. Our corporate headshots look absolutely amazing and professional."</blockquote>
+          <div class="flex text-amber-500">
             <span class="text-xl">★★★★★</span>
           </div>
         </div>
         
         <!-- Testimonial 3 -->
-        <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2">
+        <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-8 border border-amber-100/30 hover:bg-white/95 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
-              <span class="text-black font-bold text-lg">E</span>
+            <div class="w-14 h-14 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-4 shadow-lg">
+              <span class="text-white font-bold text-xl">E</span>
             </div>
             <div>
-              <h4 class="text-white font-semibold">Emma & David</h4>
-              <p class="text-gray-300 text-sm">Family Portrait</p>
+              <h4 class="text-gray-800 font-semibold text-lg">Emma & David</h4>
+              <p class="text-gray-600 text-sm">Family Portrait</p>
             </div>
           </div>
-          <blockquote class="italic text-gray-200 leading-relaxed mb-4">"Our family portraits are beyond beautiful! The photographer made us feel so comfortable and captured our personalities perfectly."</blockquote>
-          <div class="flex text-gold">
+          <blockquote class="italic text-gray-700 leading-relaxed mb-4 text-base">"Our family portraits are beyond beautiful! The photographer made us feel so comfortable and captured our personalities perfectly."</blockquote>
+          <div class="flex text-amber-500">
             <span class="text-xl">★★★★★</span>
           </div>
         </div>
         
         <!-- Testimonial 4 -->
-        <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2">
+        <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-8 border border-amber-100/30 hover:bg-white/95 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 shadow-xl">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mr-4">
-              <span class="text-white font-bold text-lg">J</span>
+            <div class="w-14 h-14 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+              <span class="text-white font-bold text-xl">J</span>
             </div>
             <div>
-              <h4 class="text-white font-semibold">Jennifer L.</h4>
-              <p class="text-gray-300 text-sm">Fashion Model</p>
+              <h4 class="text-gray-800 font-semibold text-lg">Jennifer L.</h4>
+              <p class="text-gray-600 text-sm">Fashion Model</p>
             </div>
           </div>
-          <blockquote class="italic text-gray-200 leading-relaxed mb-4">"Incredible fashion photography! The lighting, composition, and artistic direction created stunning editorial shots for my portfolio."</blockquote>
-          <div class="flex text-gold">
+          <blockquote class="italic text-gray-700 leading-relaxed mb-4 text-base">"Incredible fashion photography! The lighting, composition, and artistic direction created stunning editorial shots for my portfolio."</blockquote>
+          <div class="flex text-amber-500">
             <span class="text-xl">★★★★★</span>
           </div>
         </div>
@@ -1132,103 +1245,103 @@
         <div class="testimonials-carousel overflow-x-auto scrollbar-hide" id="testimonials-carousel">
           <div class="flex gap-6 min-w-max px-4">
             <!-- Testimonial 1 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center mr-3">
-                  <span class="text-black font-bold text-base">S</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">S</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Sarah & John</h4>
-                  <p class="text-gray-300 text-xs">Wedding Couple</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Sarah & John</h4>
+                  <p class="text-gray-600 text-xs">Wedding Couple</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Absolutely stunning photos! Captured every moment perfectly. The attention to detail and artistic vision exceeded our expectations."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Absolutely stunning photos! Captured every moment perfectly. The attention to detail and artistic vision exceeded our expectations."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★★</span>
               </div>
             </div>
             
             <!-- Testimonial 2 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3">
-                  <span class="text-white font-bold text-base">M</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">M</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Michael B.</h4>
-                  <p class="text-gray-300 text-xs">Corporate Client</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Michael B.</h4>
+                  <p class="text-gray-600 text-xs">Corporate Client</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Professional, creative, and a joy to work with. Our corporate headshots look absolutely amazing and professional."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Professional, creative, and a joy to work with. Our corporate headshots look absolutely amazing and professional."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★★</span>
               </div>
             </div>
             
             <!-- Testimonial 3 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center mr-3">
-                  <span class="text-black font-bold text-base">E</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">E</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Emma & David</h4>
-                  <p class="text-gray-300 text-xs">Family Portrait</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Emma & David</h4>
+                  <p class="text-gray-600 text-xs">Family Portrait</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Our family portraits are beyond beautiful! The photographer made us feel so comfortable and captured our personalities perfectly."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Our family portraits are beyond beautiful! The photographer made us feel so comfortable and captured our personalities perfectly."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★★</span>
               </div>
             </div>
             
             <!-- Testimonial 4 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3">
-                  <span class="text-white font-bold text-base">J</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">J</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Jennifer L.</h4>
-                  <p class="text-gray-300 text-xs">Fashion Model</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Jennifer L.</h4>
+                  <p class="text-gray-600 text-xs">Fashion Model</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Incredible fashion photography! The lighting, composition, and artistic direction created stunning editorial shots for my portfolio."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Incredible fashion photography! The lighting, composition, and artistic direction created stunning editorial shots for my portfolio."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★★</span>
               </div>
             </div>
             
             <!-- Testimonial 5 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center mr-3">
-                  <span class="text-black font-bold text-base">R</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">R</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Robert K.</h4>
-                  <p class="text-gray-300 text-xs">Real Estate</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Robert K.</h4>
+                  <p class="text-gray-600 text-xs">Real Estate</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Outstanding real estate photography! The property photos helped us sell our house above asking price in just one week."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Outstanding real estate photography! The property photos helped us sell our house above asking price in just one week."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★☆</span>
               </div>
             </div>
             
             <!-- Testimonial 6 -->
-            <div class="testimonial-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex-shrink-0 w-80">
+            <div class="testimonial-card bg-white/90 backdrop-blur-sm rounded-3xl p-6 border border-amber-100/30 flex-shrink-0 w-80 shadow-xl">
               <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3">
-                  <span class="text-white font-bold text-base">L</span>
+                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                  <span class="text-white font-bold text-lg">L</span>
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold text-sm">Lisa M.</h4>
-                  <p class="text-gray-300 text-xs">Product Photography</p>
+                  <h4 class="text-gray-800 font-semibold text-base">Lisa M.</h4>
+                  <p class="text-gray-600 text-xs">Product Photography</p>
                 </div>
               </div>
-              <blockquote class="italic text-gray-200 leading-relaxed mb-3 text-sm">"Amazing product photography for my online store! Sales increased by 40% after updating with the new professional photos."</blockquote>
-              <div class="flex text-gold">
+              <blockquote class="italic text-gray-700 leading-relaxed mb-3 text-sm">"Amazing product photography for my online store! Sales increased by 40% after updating with the new professional photos."</blockquote>
+              <div class="flex text-amber-500">
                 <span class="text-lg">★★★★★</span>
               </div>
             </div>
@@ -1237,7 +1350,7 @@
         
         <!-- Mobile Navigation Dots -->
         <div class="flex justify-center mt-6 space-x-2">
-          <button class="w-2 h-2 bg-gold rounded-full opacity-100" data-slide="0"></button>
+          <button class="w-2 h-2 bg-amber-500 rounded-full opacity-100" data-slide="0"></button>
           <button class="w-2 h-2 bg-gray-400 rounded-full opacity-50" data-slide="1"></button>
           <button class="w-2 h-2 bg-gray-400 rounded-full opacity-50" data-slide="2"></button>
           <button class="w-2 h-2 bg-gray-400 rounded-full opacity-50" data-slide="3"></button>
@@ -1248,8 +1361,8 @@
       
       <!-- Call to Action -->
       <div class="text-center mt-16">
-        <p class="text-gray-300 text-lg mb-6">Ready to create your own amazing memories?</p>
-        <a href="#contact" class="inline-block px-8 py-4 bg-gold text-black font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300">
+        <p class="text-gray-600 text-lg mb-6">Ready to create your own amazing memories?</p>
+        <a href="#contact" class="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-full shadow-lg hover:from-red-700 hover:to-red-800 hover:scale-105 transition-all duration-300">
           Book Your Session
         </a>
       </div>
@@ -1257,14 +1370,14 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-24" style="background: linear-gradient(135deg, #1a0f1a 0%, #4a1a2a 50%, #2d0f1a 100%);">
+      <section id="contact" class="py-24" style="background: #f8f9fa;">
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Left Column: Contact Information -->
         <div class="space-y-8">
           <div>
-            <h2 class="text-5xl font-artistic text-white mb-6 gold-accent font-bold tracking-tight">Get In Touch</h2>
-            <p class="text-xl text-gray-300 leading-relaxed">Ready to book your session or have a question? We're here to help you capture your perfect moments.</p>
+            <h2 class="text-5xl font-artistic text-gray-800 mb-6 gold-accent font-bold tracking-tight">Get In Touch</h2>
+                          <p class="text-xl text-gray-600 leading-relaxed">Ready to book your session or have a question? We're here to help you capture your perfect moments.</p>
           </div>
           
           <!-- Contact Details -->
@@ -1278,9 +1391,9 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-white font-semibold text-lg mb-1">Address</h4>
-                <p class="text-gray-300">Westlands, Nairobi</p>
-                <p class="text-gray-300">P.O. Box 12345-00100</p>
+                <h4 class="text-gray-800 font-semibold text-lg mb-1">Address</h4>
+                                  <p class="text-gray-600">Westlands, Nairobi</p>
+                  <p class="text-gray-600">P.O. Box 12345-00100</p>
               </div>
             </div>
             
@@ -1292,8 +1405,8 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-white font-semibold text-lg mb-1">Phone Number</h4>
-                <p class="text-gray-300">+254 700 123 456</p>
+                <h4 class="text-gray-800 font-semibold text-lg mb-1">Phone Number</h4>
+                                  <p class="text-gray-600">+254 700 123 456</p>
               </div>
             </div>
             
@@ -1305,15 +1418,15 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-white font-semibold text-lg mb-1">E-Mail</h4>
-                <p class="text-gray-300">info@lawphotography.com</p>
+                <h4 class="text-gray-800 font-semibold text-lg mb-1">E-Mail</h4>
+                                  <p class="text-gray-600">info@lawphotography.com</p>
               </div>
             </div>
           </div>
           
           <!-- Follow Us Section -->
           <div>
-            <h4 class="text-white font-semibold text-lg mb-4">Follow Us:</h4>
+            <h4 class="text-gray-800 font-semibold text-lg mb-4">Follow Us:</h4>
             <div class="flex space-x-4">
               <!-- Instagram -->
               <a href="#" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center transition-all duration-300 group">
